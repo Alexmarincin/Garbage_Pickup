@@ -30,7 +30,6 @@ options.add_argument('--disable-gpu')  # Disable GPU acceleration
 options.add_argument('--headless')  # Run headless (no GUI)
 
 # Initialize the WebDriver without specifying the driver path (chromedriver-autoinstaller will handle it)
-driver = webdriver.Chrome(options=options)he driver path (GitHub Actions handles it)
 driver = webdriver.Chrome(options=options)
 
 try:
