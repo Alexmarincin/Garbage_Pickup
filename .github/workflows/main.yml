@@ -17,8 +17,19 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Set up Google Chrome and ChromeDriver
-        uses: actions/setup-chrome@v2
+      - name: Install Chrome and ChromeDriver
+        run: |
+          # Install Google Chrome
+          sudo apt-get update -qq
+          sudo apt-get install -y wget curl unzip
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install ./google-chrome-stable_current_amd64.deb
+
+          # Install ChromeDriver
+          CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
+          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin
 
       - name: Install dependencies
         run: |
