@@ -1,0 +1,38 @@
+name: Run Selenium Script
+
+on:
+  workflow_dispatch:  # Allows manual triggering
+  push:  # Runs on push
+    branches:
+      - main
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install selenium
+
+    - name: Run Script
+      env:  # Map GitHub secrets to environment variables
+        FIRST_NAME: ${{ secrets.FIRST_NAME }}
+        LAST_NAME: ${{ secrets.LAST_NAME }}
+        ADDRESS: ${{ secrets.ADDRESS }}
+        CITY: ${{ secrets.CITY }}
+        ZIP_CODE: ${{ secrets.ZIP_CODE }}
+        PHONE: ${{ secrets.PHONE }}
+        STATE_INDEX: ${{ secrets.STATE_INDEX }}
+        STATE: ${{ secrets.STATE }}
+      run: |
+        python your_script.py
