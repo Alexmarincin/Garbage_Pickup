@@ -19,21 +19,14 @@ config = {
     "state_index": os.getenv("STATE_INDEX", "16"),  # Default to index 16 if not provided
 }
 
-# Print for debugging purposes (optional; remove in production)
-print("Loaded Configuration:")
-print(config)
-
 # Set up Chrome options
 options = Options()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--disable-gpu')  # Disable GPU acceleration
+options.add_argument('--headless')  # Run headless (no GUI)
 
-# Provide the path to ChromeDriver
-driver_path = "C:\\Program Files\\chromedriver-win64\\chromedriver.exe"
-service = Service(driver_path)
-
-# Initialize the WebDriver with the Service object
-driver = webdriver.Chrome(service=service, options=options)
+# Initialize the WebDriver without specifying the driver path (GitHub Actions handles it)
+driver = webdriver.Chrome(options=options)
 
 try:
     # Open the Signup Genius URL
