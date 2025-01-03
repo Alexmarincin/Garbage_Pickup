@@ -1,11 +1,15 @@
 import time
 import os
+import chromedriver_autoinstaller  # Import chromedriver-autoinstaller
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+
+# Automatically download and install the correct version of ChromeDriver
+chromedriver_autoinstaller.install()
 
 # Load sensitive data from environment variables
 config = {
@@ -25,7 +29,8 @@ options.add_argument('--ignore-certificate-errors')
 options.add_argument('--disable-gpu')  # Disable GPU acceleration
 options.add_argument('--headless')  # Run headless (no GUI)
 
-# Initialize the WebDriver without specifying the driver path (GitHub Actions handles it)
+# Initialize the WebDriver without specifying the driver path (chromedriver-autoinstaller will handle it)
+driver = webdriver.Chrome(options=options)he driver path (GitHub Actions handles it)
 driver = webdriver.Chrome(options=options)
 
 try:
