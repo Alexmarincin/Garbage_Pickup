@@ -35,4 +35,4 @@ jobs:
         STATE_INDEX: ${{ secrets.STATE_INDEX }}
         STATE: ${{ secrets.STATE }}
       run: |
-        python your_script.py
+        python formtest.py
