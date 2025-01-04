@@ -27,10 +27,14 @@ config = {
 options = Options()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--disable-gpu')  # Disable GPU acceleration
-#options.add_argument('--headless')  # Run headless (no GUI)
+options.add_argument('--no-sandbox')
+options.add_argument('--headless')  # Run headless (no GUI)
 
 # Initialize the WebDriver without specifying the driver path (chromedriver-autoinstaller will handle it)
 driver = webdriver.Chrome(options=options)
+
+print(f"Chrome version: {webdriver.Chrome(service=Service()).capabilities['browserVersion']}")
+print(f"ChromeDriver version: {webdriver.Chrome(service=Service()).capabilities['chrome']['chromedriverVersion']}")
 
 try:
     # Open the Signup Genius URL
