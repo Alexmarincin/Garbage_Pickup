@@ -27,7 +27,7 @@ config = {
 options = Options()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--disable-gpu')  # Disable GPU acceleration
-options.add_argument('--headless')  # Run headless (no GUI)
+#options.add_argument('--headless')  # Run headless (no GUI)
 
 # Initialize the WebDriver without specifying the driver path (chromedriver-autoinstaller will handle it)
 driver = webdriver.Chrome(options=options)
@@ -40,7 +40,7 @@ try:
 
     # Locate and click the "Sign Up" button
     try:
-        sign_up_button = WebDriverWait(driver, 10).until(
+        sign_up_button = WebDriverWait(driver, 30).until( #Incrased from 10 to 30 seconds
             EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'btn-signup')]"))
         )
         sign_up_button.click()
