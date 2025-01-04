@@ -1,4 +1,4 @@
-ame: Run Selenium Test
+name: Run Selenium Test
 
 on:
   push:
