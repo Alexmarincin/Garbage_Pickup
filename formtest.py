@@ -66,20 +66,20 @@ try:
         print("'Save & Continue' button not found. Proceeding without it.")
 
     # Wait for the form to load
-try:
-    print("Waiting for the form to load or an identifiable element...")
-    WebDriverWait(driver, 60).until(  # Increased timeout to 60 seconds
-        EC.presence_of_element_located((By.XPATH, "//form"))  # Change if another element reliably indicates the form is loaded
-    )
-    print("Form loaded successfully.")
-except Exception as e:
-    print(f"Error loading form: {e}")
-    # Save the page source for debugging
-    with open("error_page_source.html", "w", encoding="utf-8") as f:
-        f.write(driver.page_source)
-    print("Saved page source as 'error_page_source.html'.")
-    driver.quit()
-    exit()
+    try:
+        print("Waiting for the form to load or an identifiable element...")
+        WebDriverWait(driver, 60).until(  # Increased timeout to 60 seconds
+            EC.presence_of_element_located((By.XPATH, "//form"))  # Change if another element reliably indicates the form is loaded
+        )
+        print("Form loaded successfully.")
+    except Exception as e:
+        print(f"Error loading form: {e}")
+        # Save the page source for debugging
+        with open("error_page_source.html", "w", encoding="utf-8") as f:
+            f.write(driver.page_source)
+        print("Saved page source as 'error_page_source.html'.")
+        driver.quit()
+        exit()
 
     # Dynamically fill fields
     name_filled = False
