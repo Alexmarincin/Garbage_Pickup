@@ -1,6 +1,6 @@
 import time
 import os
-import chromedriver_autoinstaller  # Import chromedriver-autoinstaller
+import chromedriver_autoinstaller  # Ensure chromedriver-autoinstaller is installed
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -26,17 +26,25 @@ config = {
 options = Options()
 options.add_argument('--headless')  # Run Chrome in headless mode
 options.add_argument('--no-sandbox')  # Bypass OS security model
-options.add_argument('--disable-dev-shm-usage')  # Overcome limited resource problems
-options.add_argument('--disable-gpu')  # Disable GPU for headless mode stability
-options.add_argument('--window-size=1920,1080')  # Optional for consistent behavior
+options.add_argument('--disable-dev-shm-usage')  # Overcome resource limitations
+options.add_argument('--disable-gpu')  # Disable GPU for stability
+options.add_argument('--window-size=1920,1080')  # Optional for consistent layout behavio
 
+# Initialize the WebDriver using the installed ChromeDriver
 driver = webdriver.Chrome(options=options)
-
-# Initialize the WebDriver without specifying the driver path (chromedriver-autoinstaller will handle it)
-#driver = webdriver.Chrome(options=options)
 
 print(f"Chrome version: {webdriver.Chrome(service=Service()).capabilities['browserVersion']}")
 print(f"ChromeDriver version: {webdriver.Chrome(service=Service()).capabilities['chrome']['chromedriverVersion']}")
+
+try:
+    # Verify that the ChromeDriver and browser are running correctly
+    chrome_version = driver.capabilities['browserVersion']
+    print(f"Chrome version: {chrome_version}")
+
+    # Your existing logic for interacting with the website
+    print("Driver and dependencies set up successfully.")
+except Exception as e:
+    print(f"Error occurred: {e}")
 
 try:
     # Open the Signup Genius URL
