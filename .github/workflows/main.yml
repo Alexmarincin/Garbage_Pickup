@@ -21,34 +21,10 @@ jobs:
         run: |
           sudo apt-get install -y wget curl unzip fonts-liberation libappindicator3-1 libatk-bridge2.0-0 libatspi2.0-0 libcups2 libdbus-1-3 libnss3 libxcomposite1 libxcursor1 libxi6 libxrandr2 libxss1 libxtst6
 
-      - name: Install Chrome and ChromeDriver
+      - name: Install Chrome
         run: |
-          # Install Google Chrome
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install -y ./google-chrome-stable_current_amd64.deb
-
-          # Get Chrome version and strip major version
-          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1)
-          echo "Detected Chrome version: $CHROME_VERSION"
-
-          # Fetch the appropriate ChromeDriver version
-          CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then
-            echo "Error: Unable to fetch correct ChromeDriver version."
-            exit 1
-          fi
-          echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
-
-          # Download and install ChromeDriver
-          wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
-
-      - name: Check Chrome and ChromeDriver Versions
-        run: |
-          google-chrome --version
-          chromedriver --version
 
       - name: Set up Python
         uses: actions/setup-python@v2

@@ -2,7 +2,6 @@ import time
 import os
 import chromedriver_autoinstaller  # Import chromedriver-autoinstaller
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -20,7 +19,7 @@ config = {
     "zip_code": os.getenv("ZIP_CODE"),
     "phone": os.getenv("PHONE"),
     "state": os.getenv("STATE"),
-    "state_index": os.getenv("STATE_INDEX", "16"),  # Default to index 16 if not provided
+    "state_index": os.getenv("STATE_INDEX", "16"),
 }
 
 # Set up Chrome options
@@ -31,8 +30,7 @@ options.add_argument('--disable-dev-shm-usage')  # Overcome limited resource pro
 options.add_argument('--disable-gpu')  # Disable GPU for headless mode stability
 options.add_argument('--window-size=1920,1080')  # Optional for consistent behavior
 
-service = Service('/usr/local/bin/chromedriver')  # Ensure correct path
-driver = webdriver.Chrome(service=service, options=options)
+driver = webdriver.Chrome(options=options)
 
 # Initialize the WebDriver without specifying the driver path (chromedriver-autoinstaller will handle it)
 #driver = webdriver.Chrome(options=options)
