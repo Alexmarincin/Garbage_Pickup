@@ -131,16 +131,22 @@ try:
 
     # Submit the form
     try:
+        print("Looking for the 'Sign Up Now' button...", flush=True)
+        # Locate the button using the `data-ng-click` attribute
         sign_up_now_button = WebDriverWait(driver, 30).until(
-            EC.element_to_be_clickable((By.NAME, "btnSignUp"))
+            EC.element_to_be_clickable((By.XPATH, "//button[@data-ng-click='ProcessSignUp()']"))
         )
         sign_up_now_button.click()
-        print("'Sign Up Now' button clicked successfully.")
+        print("'Sign Up Now' button clicked successfully.", flush=True)
     except Exception as e:
-        print(f"Error clicking 'Sign Up Now' button: {e}")
+        print(f"Error clicking 'Sign Up Now' button: {e}", flush=True)
+        # Save the page source for debugging
+        with open("error_page_source.html", "w", encoding="utf-8") as f:
+            f.write(driver.page_source)
+        print("Saved page source as 'error_page_source.html'.", flush=True)
 
-except Exception as e:
-    print(f"Unexpected error occurred: {e}")
+    except Exception as e:
+        print(f"Unexpected error occurred: {e}", flush=True)
 
 finally:
     driver.quit()
