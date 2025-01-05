@@ -74,9 +74,9 @@ try:
         WebDriverWait(driver, 80).until(  # Increased timeout to 60 seconds
             EC.presence_of_element_located((By.XPATH, "//input[@id='firstname']"))  # Change if another element reliably indicates the form is loaded
         )
-        print("Form loaded successfully.", flush=True))
+        print("Form loaded successfully.", flush=True)
     except Exception as e:
-        print(f"Error loading form: {e}", flush=True))
+        print(f"Error loading form: {e}", flush=True)
         # Save the page source for debugging
         with open("error_page_source.html", "w", encoding="utf-8") as f:
             f.write(driver.page_source)
