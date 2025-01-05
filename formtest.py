@@ -30,21 +30,17 @@ options.add_argument('--disable-dev-shm-usage')  # Overcome resource limitations
 options.add_argument('--disable-gpu')  # Disable GPU for stability
 options.add_argument('--window-size=1920,1080')  # Optional for consistent layout behavio
 
-# Initialize the WebDriver using the installed ChromeDriver
-driver = webdriver.Chrome(options=options)
 
-print(f"Chrome version: {webdriver.Chrome(service=Service()).capabilities['browserVersion']}")
-print(f"ChromeDriver version: {webdriver.Chrome(service=Service()).capabilities['chrome']['chromedriverVersion']}")
-
+# Initialize the WebDriver
 try:
-    # Verify that the ChromeDriver and browser are running correctly
-    chrome_version = driver.capabilities['browserVersion']
-    print(f"Chrome version: {chrome_version}")
+    driver = webdriver.Chrome(options=options)
+    print(f"Chrome version: {driver.capabilities['browserVersion']}")
 
-    # Your existing logic for interacting with the website
-    print("Driver and dependencies set up successfully.")
+    # Add your program logic here
+    print("WebDriver initialized successfully. Ready to interact with the site.")
 except Exception as e:
-    print(f"Error occurred: {e}")
+    print(f"Error occurred during WebDriver initialization: {e}")
+
 
 try:
     # Open the Signup Genius URL
