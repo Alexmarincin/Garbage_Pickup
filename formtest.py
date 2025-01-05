@@ -65,15 +65,18 @@ try:
     except:
         print("'Save & Continue' button not found. Proceeding without it.")
 
+    driver.save_screenshot("error_screenshot.png")
+    print("Saved screenshot as 'error_screenshot.png'.", flush=True)
+
     # Wait for the form to load
     try:
         print("Waiting for the form to load or an identifiable element...")
-        WebDriverWait(driver, 60).until(  # Increased timeout to 60 seconds
-            EC.presence_of_element_located((By.XPATH, "//form"))  # Change if another element reliably indicates the form is loaded
+        WebDriverWait(driver, 80).until(  # Increased timeout to 60 seconds
+            EC.presence_of_element_located((By.XPATH, "//input[@id='firstname']"))  # Change if another element reliably indicates the form is loaded
         )
-        print("Form loaded successfully.")
+        print("Form loaded successfully.", flush=True))
     except Exception as e:
-        print(f"Error loading form: {e}")
+        print(f"Error loading form: {e}", flush=True))
         # Save the page source for debugging
         with open("error_page_source.html", "w", encoding="utf-8") as f:
             f.write(driver.page_source)
